@@ -25,21 +25,8 @@ export default async (req, res) => {
   }
 
   if (req.method === 'POST') {
-    console.log(req.body)
     client.record
-      .addRecord({
-        app: appId,
-        record: {
-          purchase_order_date: { value: '2021-12-10' },
-          receiving_date: { value: '2021-12-10' },
-          coffee_no: { value: 6 },
-          product_name: { value: 'パナマ　エスメラルダ　ゲイシャ' },
-          count: { value: 1 },
-          price: { value: 4000 },
-          grams: { value: 100 },
-          roast: { value: 5 },
-        },
-      })
+      .addRecord({ app: appId, record: req.body })
       .then(({ id, revision }) => {
         return res
           .statusCode(200)
