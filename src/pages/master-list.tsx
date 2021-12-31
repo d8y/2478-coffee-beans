@@ -11,6 +11,7 @@ import {
 import { KintoneRestAPIClient } from '@kintone/rest-api-client'
 import OrderDialog from '@/components/orderDialog'
 import React from 'react'
+import Price from '@/components/price'
 
 export default ({ records, totalCount }) => {
   return (
@@ -33,7 +34,9 @@ export default ({ records, totalCount }) => {
               <Td>{record.coffee_no.value}</Td>
               <Td>{record.product_name.value}</Td>
               <Td>{record.grams.value}</Td>
-              <Td>{record.price.value}</Td>
+              <Td>
+                <Price price={record.price.value} />
+              </Td>
               <Td>{record.roast.value}</Td>
               <Td>
                 <OrderDialog record={record} />

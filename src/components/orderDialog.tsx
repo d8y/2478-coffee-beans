@@ -22,6 +22,7 @@ import {
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
+import Price from '@/components/price'
 
 interface Props {
   record: object
@@ -138,7 +139,7 @@ const OrderDialog: FC<Props> = ({ record }) => {
                   </Box>
                   <Spacer />
                   <Box as={'dd'} fontWeight={'semibold'}>
-                    {record.price.value}円
+                    <Price price={record.price.value} />
                   </Box>
                 </Flex>
                 <Divider py={3} />
