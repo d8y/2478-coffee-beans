@@ -12,6 +12,7 @@ import { KintoneRestAPIClient } from '@kintone/rest-api-client'
 import OrderDialog from '@/components/orderDialog'
 import React from 'react'
 import Price from '@/components/price'
+import Gram from '@/components/gram'
 
 export default ({ records, totalCount }) => {
   return (
@@ -22,7 +23,7 @@ export default ({ records, totalCount }) => {
           <Tr>
             <Th>コーヒーNo</Th>
             <Th>商品名</Th>
-            <Th>量(g)</Th>
+            <Th>量</Th>
             <Th>金額</Th>
             <Th>店主おすすめロースト</Th>
             <Th>注文</Th>
@@ -33,7 +34,9 @@ export default ({ records, totalCount }) => {
             <Tr key={record.id.value}>
               <Td>{record.coffee_no.value}</Td>
               <Td>{record.product_name.value}</Td>
-              <Td>{record.grams.value}</Td>
+              <Td>
+                <Gram gram={record.grams.value} />
+              </Td>
               <Td>
                 <Price price={record.price.value} />
               </Td>

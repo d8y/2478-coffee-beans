@@ -13,6 +13,7 @@ import useSWR from 'swr'
 import axios, { AxiosResponse } from 'axios'
 import { KintoneResponse, Order } from '@/types'
 import Price from '@/components/price'
+import Gram from '@/components/gram'
 
 const fetcher = async (url: string): Promise<KintoneResponse> =>
   axios
@@ -50,7 +51,7 @@ const orderList = () => {
                 <Th>商品名</Th>
                 <Th>個数</Th>
                 <Th>金額</Th>
-                <Th>グラム</Th>
+                <Th>量</Th>
                 <Th>ロースト</Th>
               </Tr>
             </Thead>
@@ -66,7 +67,9 @@ const orderList = () => {
                   <Td>
                     <Price price={record.price.value} />
                   </Td>
-                  <Td>{record.grams.value}</Td>
+                  <Td>
+                    <Gram gram={record.grams.value} />
+                  </Td>
                   <Td>{record.roast.value}</Td>
                   <Td></Td>
                 </Tr>
