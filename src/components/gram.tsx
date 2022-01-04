@@ -1,9 +1,9 @@
 type Props = {
-    gram: string
+  gram: string
 }
 
-const gram = ({gram}: Props) => {
-    return <span>{gram}g</span>
+const gram = ({ gram }: Props) => {
+  return <span>{gram}g</span>
 }
 
 export default gram
