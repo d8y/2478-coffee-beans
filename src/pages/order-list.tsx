@@ -4,7 +4,6 @@ import {
   Table,
   Tbody,
   Td,
-  Text,
   Th,
   Thead,
   Tr,
@@ -14,6 +13,7 @@ import axios, { AxiosResponse } from 'axios'
 import { KintoneResponse, Order } from '@/types'
 import Price from '@/components/price'
 import Gram from '@/components/gram'
+import PageHeader from '@/components/pageHeader'
 
 const fetcher = async (url: string): Promise<KintoneResponse> =>
   axios
@@ -36,10 +36,8 @@ const orderList = () => {
 
   return (
     <Container maxW={'container.xl'} centerContent>
-      <Box>
-        <Text color={'blue'} align={'center'} fontSize={'5xl'}>
-          2478
-        </Text>
+      <Box p={4}>
+        <PageHeader title={'2478コーヒー豆発注リスト'} />
         <Box>
           <Table variant={'striped'} fontSize={'sm'}>
             <Thead>
