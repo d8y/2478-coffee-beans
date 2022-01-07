@@ -2,8 +2,6 @@ import {
   Box,
   Button,
   Divider,
-  Flex,
-  FlexProps,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -14,21 +12,20 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Spacer,
+  ModalOverlay,
   Text,
-  useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
-import Price from '@/components/price'
+import ContentsHeader from '@/components/orderDialog/contentsHeader'
 
 type Props = {
   record: object
 }
 
-const OrderDialog: FC<Props> = ({ record }) => {
+const Index: FC<Props> = ({ record }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     register,
@@ -73,6 +70,7 @@ const OrderDialog: FC<Props> = ({ record }) => {
         motionPreset={'slideInBottom'}
         scrollBehavior={'inside'}
       >
+        <ModalOverlay />
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalContent>
             <ModalHeader>注文追加</ModalHeader>
@@ -80,66 +78,7 @@ const OrderDialog: FC<Props> = ({ record }) => {
             <Text pl={6}>以下の内容で追加します</Text>
             <ModalBody>
               <Box>
-                <Flex
-                  direction={{ base: 'column', sm: 'row' }}
-                  px="6"
-                  py="4"
-                  _even={{ bg: useColorModeValue('gray.50', 'gray.600') }}
-                  {...FlexProps}
-                >
-                  <Box as={'dt'} minWidth="180px">
-                    コーヒーNo
-                  </Box>
-                  <Spacer />
-                  <Box as={'dd'} fontWeight={'semibold'}>
-                    {record.coffee_no.value}
-                  </Box>
-                </Flex>
-                <Flex
-                  direction={{ base: 'column', sm: 'row' }}
-                  px="6"
-                  py="4"
-                  _even={{ bg: useColorModeValue('gray.50', 'gray.600') }}
-                  {...FlexProps}
-                >
-                  <Box as={'dt'} minWidth="180px">
-                    商品名
-                  </Box>
-                  <Spacer />
-                  <Box as={'dd'} fontWeight={'semibold'}>
-                    {record.product_name.value}
-                  </Box>
-                </Flex>
-                <Flex
-                  direction={{ base: 'column', sm: 'row' }}
-                  px="6"
-                  py="4"
-                  _even={{ bg: useColorModeValue('gray.50', 'gray.600') }}
-                  {...FlexProps}
-                >
-                  <Box as={'dt'} minWidth="180px">
-                    グラム
-                  </Box>
-                  <Spacer />
-                  <Box as={'dd'} fontWeight={'semibold'}>
-                    {record.grams.value}g
-                  </Box>
-                </Flex>
-                <Flex
-                  direction={{ base: 'column', sm: 'row' }}
-                  px="6"
-                  py="4"
-                  _even={{ bg: useColorModeValue('gray.50', 'gray.600') }}
-                  {...FlexProps}
-                >
-                  <Box as={'dt'} minWidth="180px">
-                    金額
-                  </Box>
-                  <Spacer />
-                  <Box as={'dd'} fontWeight={'semibold'}>
-                    <Price price={record.price.value} />
-                  </Box>
-                </Flex>
+                <ContentsHeader record={record} />
                 <Divider py={3} />
                 <Box py={2}>
                   <FormControl isInvalid={errors.purchase_order_date}>
@@ -232,4 +171,4 @@ const OrderDialog: FC<Props> = ({ record }) => {
     </>
   )
 }
-export default OrderDialog
+export default Index

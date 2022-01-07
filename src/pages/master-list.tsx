@@ -9,27 +9,35 @@ import {
   Tr,
 } from '@chakra-ui/react'
 import { KintoneRestAPIClient } from '@kintone/rest-api-client'
-import OrderDialog from '@/components/orderDialog'
+import OrderDialog from '@/components/orderDialog/index'
 import React from 'react'
 import Price from '@/components/price'
 import Gram from '@/components/gram'
 import PageHeader from '@/components/pageHeader'
 
 export default ({ records, totalCount }) => {
+  const pageHeader = '2478コーヒー豆マスタ'
+
+  const headers = [
+    'コーヒーNo',
+    '商品名',
+    '量',
+    '金額',
+    '店主おすすめロースト',
+    '',
+  ]
+
   return (
     <Container maxW={'container.xl'} centerContent>
       <Box p={4}>
-        <PageHeader title={'2478コーヒー豆マスタ'} />
+        <PageHeader title={pageHeader} />
         <Box>
           <Table variant="striped" fontSize="sm">
             <Thead>
               <Tr>
-                <Th>コーヒーNo</Th>
-                <Th>商品名</Th>
-                <Th>量</Th>
-                <Th>金額</Th>
-                <Th>店主おすすめロースト</Th>
-                <Th>注文</Th>
+                {headers.map((header, key) => (
+                  <Th key={key}>{header}</Th>
+                ))}
               </Tr>
             </Thead>
             <Tbody>
