@@ -1,66 +1,20 @@
-import {
-  Box,
-  Container,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react'
+import { Box, Container, HStack } from '@chakra-ui/react'
 import { KintoneRestAPIClient } from '@kintone/rest-api-client'
-import OrderDialog from '@/components/orderDialog/index'
 import React from 'react'
-import Price from '@/components/price'
-import Gram from '@/components/gram'
-import PageHeader from '@/components/pageHeader'
+import DrawerMenu from '@/components/drawerMenu'
+import MasterListContents from '@/components/masterListContents'
 
 export default ({ records, totalCount }) => {
-  const pageHeader = '2478コーヒー豆マスタ'
-
-  const headers = [
-    'コーヒーNo',
-    '商品名',
-    '量',
-    '金額',
-    '店主おすすめロースト',
-    '',
-  ]
-
   return (
     <Container maxW={'container.xl'} centerContent>
-      <Box p={4}>
-        <PageHeader title={pageHeader} />
-        <Box>
-          <Table variant="striped" fontSize="sm">
-            <Thead>
-              <Tr>
-                {headers.map((header, key) => (
-                  <Th key={key}>{header}</Th>
-                ))}
-              </Tr>
-            </Thead>
-            <Tbody>
-              {records.map((record: any) => (
-                <Tr key={record.id.value}>
-                  <Td>{record.coffee_no.value}</Td>
-                  <Td>{record.product_name.value}</Td>
-                  <Td>
-                    <Gram gram={record.grams.value} />
-                  </Td>
-                  <Td>
-                    <Price price={record.price.value} />
-                  </Td>
-                  <Td>{record.roast.value}</Td>
-                  <Td>
-                    <OrderDialog record={record} />
-                  </Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
+      <HStack align={'top'}>
+        <Box p={4}>
+          <DrawerMenu />
         </Box>
-      </Box>
+        <Box p={4}>
+          <MasterListContents records={records} />
+        </Box>
+      </HStack>
     </Container>
   )
 }
