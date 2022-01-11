@@ -36,15 +36,15 @@ const MasterListContents = ({ records }: Props) => {
           <Tbody>
             {records.map((record: Master) => (
               <Tr key={record.id.value}>
-                <Td>{record.coffee_no.value}</Td>
+                <Td isNumeric>{record.coffee_no.value}</Td>
                 <Td>{record.product_name.value}</Td>
-                <Td>
+                <Td isNumeric>
                   <Gram gram={record.grams.value} />
                 </Td>
-                <Td>
+                <Td isNumeric>
                   <Price price={record.price.value} />
                 </Td>
-                <Td>{record.roast.value}</Td>
+                <Td isNumeric>{record.roast.value}</Td>
                 <Td>
                   <OrderDialog record={record} />
                 </Td>

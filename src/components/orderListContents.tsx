@@ -39,19 +39,19 @@ const OrderListContents = ({ records }: Props) => {
             <Tbody>
               {records.map((record: Order) => (
                 <Tr key={record.id.value}>
-                  <Td>{record.id.value}</Td>
+                  <Td isNumeric>{record.id.value}</Td>
                   <Td>{record.purchase_order_date.value}</Td>
                   <Td>{record.receiving_date.value}</Td>
-                  <Td>{record.coffee_no.value}</Td>
+                  <Td isNumeric>{record.coffee_no.value}</Td>
                   <Td>{record.product_name.value}</Td>
-                  <Td>{record.count.value}</Td>
-                  <Td>
+                  <Td isNumeric>{record.count.value}</Td>
+                  <Td isNumeric>
                     <Price price={record.price.value} />
                   </Td>
-                  <Td>
+                  <Td isNumeric>
                     <Gram gram={record.grams.value} />
                   </Td>
-                  <Td>{record.roast.value}</Td>
+                  <Td isNumeric>{record.roast.value}</Td>
                 </Tr>
               ))}
             </Tbody>

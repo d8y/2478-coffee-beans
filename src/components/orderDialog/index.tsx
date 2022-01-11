@@ -61,7 +61,7 @@ const Index: FC<Props> = ({ record }) => {
   return (
     <>
       <Button colorScheme={'blue'} onClick={onOpen}>
-        注文入力
+        発注入力
       </Button>
       <Modal
         isOpen={isOpen}
