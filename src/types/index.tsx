@@ -26,3 +26,12 @@ export type Order = {
   grams: NumberValue
   roast: NumberValue
 }
+
+export type Master = {
+  id: NumberValue
+  coffee_no: NumberValue
+  product_name: StringValue
+  grams: NumberValue
+  price: NumberValue
+  roast: NumberValue
+}

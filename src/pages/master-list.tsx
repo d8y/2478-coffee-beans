@@ -3,8 +3,14 @@ import { KintoneRestAPIClient } from '@kintone/rest-api-client'
 import React from 'react'
 import DrawerMenu from '@/components/drawerMenu'
 import MasterListContents from '@/components/masterListContents'
+import { Master } from '@/types'
 
-export default ({ records, totalCount }) => {
+type Props = {
+  records: Array<Master>
+  totalCount: Number
+}
+
+export default ({ records, totalCount }: Props) => {
   return (
     <Container maxW={'container.xl'} centerContent>
       <HStack align={'top'}>

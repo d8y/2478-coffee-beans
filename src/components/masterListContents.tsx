@@ -4,8 +4,13 @@ import Gram from '@/components/gram'
 import Price from '@/components/price'
 import OrderDialog from '@/components/orderDialog'
 import React from 'react'
+import { Master } from '@/types'
 
-const MasterListContents = ({ records }) => {
+type Props = {
+  records: Array<Master>
+}
+
+const MasterListContents = ({ records }: Props) => {
   const pageHeader = 'コーヒー豆マスタ'
 
   const headers = [
@@ -29,7 +34,7 @@ const MasterListContents = ({ records }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {records.map((record: any) => (
+            {records.map((record: Master) => (
               <Tr key={record.id.value}>
                 <Td>{record.coffee_no.value}</Td>
                 <Td>{record.product_name.value}</Td>
