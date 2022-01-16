@@ -25,16 +25,17 @@ export default async (req, res) => {
   }
 
   if (req.method === 'POST') {
-    client.record
-      .addRecord({ app: appId, record: req.body })
-      .then(({ id, revision }) => {
-        return res
-          .statusCode(200)
-          .setHeader('Content-Type', 'application/json')
-          .end(JSON.stringify('success'))
-      })
-      .catch((e) => {
-        console.log(e.errors)
-      })
+    console.log('post')
+    try {
+      await client.record.addRecord({ app: appId, record: req.body })
+
+      res
+        .status(200)
+        .setHeader('Content-Type', 'application/json')
+        .end(JSON.stringify('success'))
+    } catch (e) {
+      console.log(e.errors)
+      res.status(e).json({})
+    }
   }
 }
