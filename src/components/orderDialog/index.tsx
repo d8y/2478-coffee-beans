@@ -58,12 +58,16 @@ const Index: FC<Props> = ({ record }) => {
       price: { value: record.price.value },
       grams: { value: record.grams.value },
       roast: { value: values.roast },
+      master_id: { value: record.id.value },
     }
 
     await axios
       .post('/api/order', post)
       .then(() => {
         console.log('done')
+      })
+      .catch((e) => {
+        console.log(e)
       })
       .finally(() => {
         onClose()
@@ -145,6 +149,7 @@ const Index: FC<Props> = ({ record }) => {
                     <Input
                       type={'Number'}
                       size="md"
+                      defaultValue={1}
                       placeholder="個数を入力してください"
                       {...register('count', {
                         required: '必須項目です',
