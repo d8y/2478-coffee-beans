@@ -1,8 +1,13 @@
 import ContentsRow from '@/components/orderDialog/contentsRow'
 import Gram from '@/components/gram'
 import Price from '@/components/price'
+import { Master } from '@/types'
 
-const ContentsHeader = ({ record }) => {
+type Props = {
+  record: Master
+}
+
+const ContentsHeader = ({ record }: Props) => {
   return (
     <>
       <ContentsRow header={'コーヒーNo'} value={record.coffee_no.value} />
