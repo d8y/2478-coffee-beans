@@ -13,6 +13,11 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -20,9 +25,14 @@ import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import ContentsHeader from '@/components/orderDialog/contentsHeader'
+import dayjs from 'dayjs'
+import 'dayjs/locale/ja'
+import { Master } from '@/types'
+
+dayjs.locale('ja')
 
 type Props = {
-  record: object
+  record: Master
 }
 
 const Index: FC<Props> = ({ record }) => {
@@ -32,6 +42,8 @@ const Index: FC<Props> = ({ record }) => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm()
+
+  const today = dayjs().format('YYYY-MM-DD')
 
   async function onSubmit(values) {
     console.log('onSubmit')
@@ -87,13 +99,14 @@ const Index: FC<Props> = ({ record }) => {
                       id={'purchase_order_date'}
                       type={'date'}
                       size="md"
+                      value={today}
+                      isReadOnly={true}
                       {...register('purchase_order_date', {
                         required: '必須項目です',
                       })}
                     />
                     <FormErrorMessage>
-                      {errors.purchase_order_date &&
-                        errors.purchase_order_date.message}
+                      {errors?.purchase_order_date?.message}
                     </FormErrorMessage>
                   </FormControl>
                 </Box>
@@ -106,10 +119,23 @@ const Index: FC<Props> = ({ record }) => {
                       size="md"
                       {...register('receiving_date', {
                         required: '必須項目です',
+                        validate: {
+                          month: (value) =>
+                            dayjs()
+                              .add(1, 'month')
+                              .isSame(dayjs(value), 'month'),
+                          day: (value) => dayjs(value).get('day') === 1,
+                        },
                       })}
                     />
                     <FormErrorMessage>
-                      {errors.receiving_date && errors.receiving_date.message}
+                      {errors?.receiving_date?.message}
+                      {errors?.receiving_date?.type === 'month' && (
+                        <p>受取日は発注月の翌月から選択してください</p>
+                      )}
+                      {errors?.receiving_date?.type === 'day' && (
+                        <p>受取日は月曜日を選択してください</p>
+                      )}
                     </FormErrorMessage>
                   </FormControl>
                 </Box>
@@ -119,7 +145,7 @@ const Index: FC<Props> = ({ record }) => {
                     <Input
                       type={'Number'}
                       size="md"
-                      placeholder="個数"
+                      placeholder="個数を入力してください"
                       {...register('count', {
                         required: '必須項目です',
                       })}
@@ -132,22 +158,29 @@ const Index: FC<Props> = ({ record }) => {
                 <Box py={2}>
                   <FormControl isInvalid={errors.roast}>
                     <FormLabel>ロースト</FormLabel>
-                    <Input
-                      type={'Number'}
-                      size="md"
-                      placeholder="ロースト"
-                      {...register('roast', {
-                        required: '必須項目です',
-                        min: {
-                          value: 1,
-                          message: '1から6のローストを選択してください',
-                        },
-                        max: {
-                          value: 6,
-                          message: '1から6のローストを選択してください',
-                        },
-                      })}
-                    />
+                    <NumberInput
+                      defaultValue={record.roast.value}
+                      min={1}
+                      max={6}
+                    >
+                      <NumberInputField
+                        {...register('roast', {
+                          required: '必須項目です',
+                          min: {
+                            value: 1,
+                            message: '1から6のローストを選択してください',
+                          },
+                          max: {
+                            value: 6,
+                            message: '1から6のローストを選択してください',
+                          },
+                        })}
+                      />
+                      <NumberInputStepper>
+                        <NumberDecrementStepper />
+                        <NumberIncrementStepper />
+                      </NumberInputStepper>
+                    </NumberInput>
                     <FormErrorMessage>
                       {errors.roast && errors.roast.message}
                     </FormErrorMessage>
