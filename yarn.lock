@@ -811,13 +811,13 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@kintone/rest-api-client@2.0.31":
-  version "2.0.31"
-  resolved "https://registry.npmjs.org/@kintone/rest-api-client/-/rest-api-client-2.0.31.tgz"
-  integrity sha512-I6eSx6KQ3dZ/hqHFV5VZ6SPNqhNajDFYc/5eLUjUEKGu1rhpA9DLyUHDkytpkiP4I4/oeh33WFmYqf696pFGRw==
+"@kintone/rest-api-client@2.0.33":
+  version "2.0.33"
+  resolved "https://registry.yarnpkg.com/@kintone/rest-api-client/-/rest-api-client-2.0.33.tgz#c14148e5725b23312b7138e54da219f285cb04d8"
+  integrity sha512-msav+MX+RPbiJvsJcSvE/iv5tZafKXD7p0zmNwS2d0eFJFZEfF1yyQIbbnpv9eJL//zDD3JH4SzW2dPvUn8Uaw==
   dependencies:
     axios "^0.24.0"
-    core-js "^3.19.3"
+    core-js "^3.20.2"
     form-data "^4.0.0"
     js-base64 "^2.6.4"
     qs "^6.10.2"
@@ -1537,10 +1537,10 @@ core-js-pure@^3.16.0:
   resolved "https://registry.npmjs.org/core-js-pure/-/core-js-pure-3.19.0.tgz"
   integrity sha512-UEQk8AxyCYvNAs6baNoPqDADv7BX0AmBLGxVsrAifPPx/C8EAzV4Q+2ZUJqVzfI2TQQEZITnwUkWcHpgc/IubQ==
 
-core-js@^3.19.3:
-  version "3.20.1"
-  resolved "https://registry.npmjs.org/core-js/-/core-js-3.20.1.tgz"
-  integrity sha512-btdpStYFQScnNVQ5slVcr858KP0YWYjV16eGJQw8Gg7CWtu/2qNvIM3qVRIR3n1pK2R9NNOrTevbvAYxajwEjg==
+core-js@^3.20.2:
+  version "3.20.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.20.3.tgz#c710d0a676e684522f3db4ee84e5e18a9d11d69a"
+  integrity sha512-vVl8j8ph6tRS3B8qir40H7yw7voy17xL0piAjlbBUsH7WIfzoedL/ZOr1OV9FyZQLWXsayOJyV4tnRyXR85/ag==
 
 cosmiconfig@^6.0.0:
   version "6.0.0"
