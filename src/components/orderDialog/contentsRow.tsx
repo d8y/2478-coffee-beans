@@ -5,20 +5,21 @@ import {
   Spacer,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { ReactNode } from 'react'
 
 type Props = {
   header: string
-  value: string
-}
+  value: ReactNode
+} & FlexProps
 
-const ContentsRow = ({ header, value }: Props) => {
+export const ContentsRow = ({ header, value, ...flexProps }: Props) => {
   return (
     <Flex
       direction={{ base: 'column', sm: 'row' }}
       px="6"
       py="4"
       _even={{ bg: useColorModeValue('gray.50', 'gray.600') }}
-      {...FlexProps}
+      {...flexProps}
     >
       <Box as={'dt'} minWidth="8rem">
         {header}
@@ -30,5 +31,3 @@ const ContentsRow = ({ header, value }: Props) => {
     </Flex>
   )
 }
-
-export default ContentsRow

@@ -1,7 +1,7 @@
-import PageHeader from '@/components/pageHeader'
+import { PageHeader } from '@/components/pageHeader'
 import { Box, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
-import Gram from '@/components/gram'
-import Price from '@/components/price'
+import { Gram } from '@/components/gram'
+import { Price } from '@/components/price'
 import OrderDialog from '@/components/orderDialog'
 import React from 'react'
 import { Master } from '@/types'
@@ -10,7 +10,7 @@ type Props = {
   records: Array<Master>
 }
 
-const MasterListContents = ({ records }: Props) => {
+export const MasterListContents = ({ records }: Props) => {
   const pageHeader = 'コーヒー豆マスタ'
 
   const headers = [
@@ -56,5 +56,3 @@ const MasterListContents = ({ records }: Props) => {
     </>
   )
 }
-
-export default MasterListContents

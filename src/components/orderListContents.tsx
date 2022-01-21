@@ -1,14 +1,14 @@
-import PageHeader from '@/components/pageHeader'
+import { PageHeader } from '@/components/pageHeader'
 import { Box, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import { Order } from '@/types'
-import Price from '@/components/price'
-import Gram from '@/components/gram'
+import { Price } from '@/components/price'
+import { Gram } from '@/components/gram'
 
 type Props = {
   records: Array<Order>
 }
 
-const OrderListContents = ({ records }: Props) => {
+export const OrderListContents = ({ records }: Props) => {
   const title = '2478コーヒー豆発注リスト'
 
   const headers = [
@@ -61,5 +61,3 @@ const OrderListContents = ({ records }: Props) => {
     </>
   )
 }
-
-export default OrderListContents

@@ -1,8 +1,8 @@
 import { Box, Container, HStack } from '@chakra-ui/react'
 import { KintoneRestAPIClient } from '@kintone/rest-api-client'
 import React from 'react'
-import DrawerMenu from '@/components/drawerMenu'
-import MasterListContents from '@/components/masterListContents'
+import { DrawerMenu } from '@/components/drawerMenu'
+import { MasterListContents } from '@/components/masterListContents'
 import { Master } from '@/types'
 
 type Props = {

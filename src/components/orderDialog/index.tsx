@@ -24,7 +24,7 @@ import {
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
-import ContentsHeader from '@/components/orderDialog/contentsHeader'
+import { ContentsHeader } from '@/components/orderDialog/contentsHeader'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
 import { Master } from '@/types'

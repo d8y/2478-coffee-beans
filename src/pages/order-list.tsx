@@ -2,8 +2,8 @@ import { Box, Container, HStack } from '@chakra-ui/react'
 import useSWR from 'swr'
 import axios, { AxiosResponse } from 'axios'
 import { KintoneResponse, Order } from '@/types'
-import OrderListContents from '@/components/orderListContents'
-import DrawerMenu from '@/components/drawerMenu'
+import { OrderListContents } from '@/components/orderListContents'
+import { DrawerMenu } from '@/components/drawerMenu'
 
 const fetcher = async (url: string): Promise<KintoneResponse> =>
   axios

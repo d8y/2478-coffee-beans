@@ -1,9 +1,7 @@
 type Props = {
-  gram: string
+  gram: number
 }
 
-const gram = ({ gram }: Props) => {
+export const Gram = ({ gram }: Props) => {
   return <span>{gram}g</span>
 }
-
-export default gram

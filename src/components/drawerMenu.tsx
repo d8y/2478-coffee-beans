@@ -15,7 +15,7 @@ import React from 'react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 
-const DrawerMenu = () => {
+export const DrawerMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -47,5 +47,3 @@ const DrawerMenu = () => {
     </>
   )
 }
-
-export default DrawerMenu
