@@ -1,8 +1,7 @@
 import {
   Box,
   Button,
-  Container,
-  HStack,
+  Stack,
   Table,
   Tbody,
   Td,
@@ -10,7 +9,6 @@ import {
   Tr,
   useToast,
 } from '@chakra-ui/react'
-import { DrawerMenu } from '@/components/drawerMenu'
 import { PageHeader } from '@/components/pageHeader'
 import { cartSelector } from '@/selectors/cart'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
@@ -54,49 +52,42 @@ const cart = () => {
   }
 
   return (
-    <Container maxW={'container.xl'} centerContent>
-      <HStack align={'top'}>
-        <Box p={4} position={'fixed'} left={0}>
-          <DrawerMenu />
-        </Box>
-        <Box p={4}>
-          <PageHeader title={'カート'} />
-          <Table variant={'striped'} fontSize={'sm'}>
-            <Thead>
-              <Tr>
-                <Td>受取日</Td>
-                <Td>コーヒーNo</Td>
-                <Td>商品名</Td>
-                <Td>グラム</Td>
-                <Td>金額</Td>
-                <Td>グラム</Td>
-                <Td>ロースト</Td>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {orderList.map((record: Order, key) => (
-                <Tr key={key}>
-                  <Td>{record.receiving_date.value}</Td>
-                  <Td isNumeric>{record.coffee_no.value}</Td>
-                  <Td>{record.product_name.value}</Td>
-                  <Td isNumeric>{record.count.value}</Td>
-                  <Td isNumeric>
-                    <Price price={record.price.value} />
-                  </Td>
-                  <Td isNumeric>
-                    <Gram gram={record.grams.value} />
-                  </Td>
-                  <Td isNumeric>{record.roast.value}</Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </Box>
-      </HStack>
-      <HStack>
+    <Box p={4}>
+      <PageHeader title={'カート'} />
+      <Table variant={'striped'} fontSize={'sm'}>
+        <Thead>
+          <Tr>
+            <Td>受取日</Td>
+            <Td>コーヒーNo</Td>
+            <Td>商品名</Td>
+            <Td>グラム</Td>
+            <Td>金額</Td>
+            <Td>グラム</Td>
+            <Td>ロースト</Td>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {orderList.map((record: Order, key) => (
+            <Tr key={key}>
+              <Td>{record.receiving_date.value}</Td>
+              <Td isNumeric>{record.coffee_no.value}</Td>
+              <Td>{record.product_name.value}</Td>
+              <Td isNumeric>{record.count.value}</Td>
+              <Td isNumeric>
+                <Price price={record.price.value} />
+              </Td>
+              <Td isNumeric>
+                <Gram gram={record.grams.value} />
+              </Td>
+              <Td isNumeric>{record.roast.value}</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+      <Stack align={'center'} pt={8}>
         <Button onClick={handleClick}>追加</Button>
-      </HStack>
-    </Container>
+      </Stack>
+    </Box>
   )
 }
 

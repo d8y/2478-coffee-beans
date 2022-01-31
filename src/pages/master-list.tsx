@@ -1,7 +1,5 @@
-import { Box, Container, HStack } from '@chakra-ui/react'
 import { KintoneRestAPIClient } from '@kintone/rest-api-client'
 import React from 'react'
-import { DrawerMenu } from '@/components/drawerMenu'
 import { MasterListContents } from '@/components/masterListContents'
 import { Master } from '@/types'
 
@@ -11,18 +9,7 @@ type Props = {
 }
 
 export default ({ records, totalCount }: Props) => {
-  return (
-    <Container maxW={'container.xl'} centerContent>
-      <HStack align={'top'}>
-        <Box p={4}>
-          <DrawerMenu />
-        </Box>
-        <Box p={4}>
-          <MasterListContents records={records} />
-        </Box>
-      </HStack>
-    </Container>
-  )
+  return <MasterListContents records={records} />
 }
 
 export async function getServerSideProps() {
