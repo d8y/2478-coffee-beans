@@ -1,6 +1,9 @@
 import { KintoneRestAPIClient } from '@kintone/rest-api-client'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-export default async (req, res) => {
+const HTTP_SUCCESS_CODE = 200
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const appId = process.env.TRANSACTION_DATA_KINTONE_APP_ID
   if (!appId) {
     throw new Error('kintone app id が設定されていません')
@@ -19,23 +22,23 @@ export default async (req, res) => {
       totalCount: true,
     })
 
-    return res.status(200).json({
+    return res.status(HTTP_SUCCESS_CODE).json({
       ...result,
     })
   }
 
   if (req.method === 'POST') {
-    console.log('post')
     try {
-      await client.record.addRecord({ app: appId, record: req.body })
+      await client.record.addRecords({ app: appId, records: req.body })
 
       res
-        .status(200)
+        .status(HTTP_SUCCESS_CODE)
         .setHeader('Content-Type', 'application/json')
         .end(JSON.stringify('success'))
     } catch (e) {
-      console.log(e.errors)
-      res.status(e).json({})
+      res.status(e).json({
+        error: e.errors,
+      })
     }
   }
 }

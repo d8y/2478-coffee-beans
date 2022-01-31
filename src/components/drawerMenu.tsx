@@ -33,11 +33,14 @@ export const DrawerMenu = () => {
           <DrawerHeader borderBottomWidth="1px">コーヒー豆管理</DrawerHeader>
           <DrawerBody>
             <Stack pl={4}>
+              <NextLink href={'/cart'}>
+                <Link>カート</Link>
+              </NextLink>
               <NextLink href={'/master-list'}>
-                <Link>コーヒー豆マスタ</Link>
+                <Link>商品一覧</Link>
               </NextLink>
               <NextLink href={'/order-list'}>
-                <Link>コーヒー豆発注リスト</Link>
+                <Link>発注履歴</Link>
               </NextLink>
             </Stack>
           </DrawerBody>

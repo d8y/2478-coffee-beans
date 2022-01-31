@@ -18,16 +18,23 @@ import {
   NumberInput,
   NumberInputField,
   NumberInputStepper,
+  Select,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
 import { ContentsHeader } from '@/components/orderDialog/contentsHeader'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
 import { Master } from '@/types'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { cartState } from '@/atomes/cartAtom'
+import { CartIcon } from '@/components/icons/cartIcons'
+import 'dayjs/plugin/isSameOrBefore'
+
+const isSameOrBefore = require('dayjs/plugin/isSameOrBefore')
+dayjs.extend(isSameOrBefore)
 
 dayjs.locale('ja')
 
@@ -42,13 +49,24 @@ const Index: FC<Props> = ({ record }) => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm()
+  const cart = useRecoilValue(cartState)
+  const setOrderList = useSetRecoilState(cartState)
 
-  const today = dayjs().format('YYYY-MM-DD')
+  const formatToday = dayjs().format('YYYY-MM-DD')
+  const thisWeekMonday = dayjs().day(1)
+  const nextMonth = dayjs().add(1, 'month')
+
+  let t = []
+  let i = 0
+  while (thisWeekMonday.add(i, 'week').isSameOrBefore(nextMonth, 'month')) {
+    const p = thisWeekMonday.add(i, 'week')
+    if (p.isSame(nextMonth, 'month')) {
+      t.push(thisWeekMonday.add(i, 'week').format('YYYY-MM-DD'))
+    }
+    i += 2
+  }
 
   async function onSubmit(values) {
-    console.log('onSubmit')
-    console.log({ ...record, ...values })
-
     const post = {
       purchase_order_date: { value: values.purchase_order_date },
       receiving_date: { value: values.receiving_date },
@@ -61,24 +79,13 @@ const Index: FC<Props> = ({ record }) => {
       master_id: { value: record.id.value },
     }
 
-    await axios
-      .post('/api/order', post)
-      .then(() => {
-        console.log('done')
-      })
-      .catch((e) => {
-        console.log(e)
-      })
-      .finally(() => {
-        onClose()
-      })
+    setOrderList([...cart, post])
+    onClose()
   }
 
   return (
     <>
-      <Button colorScheme={'blue'} onClick={onOpen}>
-        発注入力
-      </Button>
+      <CartIcon onClick={onOpen} />
       <Modal
         isOpen={isOpen}
         onClose={onClose}
@@ -103,7 +110,7 @@ const Index: FC<Props> = ({ record }) => {
                       id={'purchase_order_date'}
                       type={'date'}
                       size="md"
-                      value={today}
+                      value={formatToday}
                       isReadOnly={true}
                       {...register('purchase_order_date', {
                         required: '必須項目です',
@@ -117,21 +124,19 @@ const Index: FC<Props> = ({ record }) => {
                 <Box py={2}>
                   <FormControl isInvalid={errors.receiving_date}>
                     <FormLabel>受取日</FormLabel>
-                    <Input
-                      id={'receiving_date'}
-                      type={'date'}
-                      size="md"
+                    <Select
+                      options={t}
                       {...register('receiving_date', {
                         required: '必須項目です',
-                        validate: {
-                          month: (value) =>
-                            dayjs()
-                              .add(1, 'month')
-                              .isSame(dayjs(value), 'month'),
-                          day: (value) => dayjs(value).get('day') === 1,
-                        },
                       })}
-                    />
+                    >
+                      {t.map((value, key) => (
+                        <option key={key} value={value}>
+                          {value}
+                        </option>
+                      ))}
+                    </Select>
+
                     <FormErrorMessage>
                       {errors?.receiving_date?.message}
                       {errors?.receiving_date?.type === 'month' && (

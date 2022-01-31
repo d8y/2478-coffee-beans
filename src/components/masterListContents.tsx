@@ -23,35 +23,37 @@ export const MasterListContents = ({ records }: Props) => {
   ]
   return (
     <>
-      <PageHeader title={pageHeader} />
-      <Box>
-        <Table variant="striped" fontSize="sm">
-          <Thead>
-            <Tr>
-              {headers.map((header, key) => (
-                <Th key={key}>{header}</Th>
-              ))}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {records.map((record: Master) => (
-              <Tr key={record.id.value}>
-                <Td isNumeric>{record.coffee_no.value}</Td>
-                <Td>{record.product_name.value}</Td>
-                <Td isNumeric>
-                  <Gram gram={record.grams.value} />
-                </Td>
-                <Td isNumeric>
-                  <Price price={record.price.value} />
-                </Td>
-                <Td isNumeric>{record.roast.value}</Td>
-                <Td>
-                  <OrderDialog record={record} />
-                </Td>
+      <Box p={4}>
+        <PageHeader title={pageHeader} />
+        <Box>
+          <Table variant="striped" fontSize="sm">
+            <Thead>
+              <Tr>
+                {headers.map((header, key) => (
+                  <Th key={key}>{header}</Th>
+                ))}
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
+            </Thead>
+            <Tbody>
+              {records.map((record: Master) => (
+                <Tr key={record.id.value}>
+                  <Td isNumeric>{record.coffee_no.value}</Td>
+                  <Td>{record.product_name.value}</Td>
+                  <Td isNumeric>
+                    <Gram gram={record.grams.value} />
+                  </Td>
+                  <Td isNumeric>
+                    <Price price={record.price.value} />
+                  </Td>
+                  <Td isNumeric>{record.roast.value}</Td>
+                  <Td>
+                    <OrderDialog record={record} />
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </Box>
       </Box>
     </>
   )
