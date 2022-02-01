@@ -1,4 +1,5 @@
 import {
+  Badge,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -14,9 +15,12 @@ import {
 import React from 'react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
+import { useRecoilValue } from 'recoil'
+import { cartCounter } from '@/selectors/cart'
 
 export const DrawerMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const cartCount = useRecoilValue(cartCounter)
 
   return (
     <>
@@ -34,13 +38,15 @@ export const DrawerMenu = () => {
           <DrawerBody>
             <Stack pl={4}>
               <NextLink href={'/cart'}>
-                <Link>カート</Link>
+                <Link onClick={onClose}>
+                  カート<Badge>{cartCount}</Badge>
+                </Link>
               </NextLink>
               <NextLink href={'/master-list'}>
-                <Link>商品一覧</Link>
+                <Link onClick={onClose}>商品一覧</Link>
               </NextLink>
               <NextLink href={'/order-list'}>
-                <Link>発注履歴</Link>
+                <Link onClick={onClose}>発注履歴</Link>
               </NextLink>
             </Stack>
           </DrawerBody>

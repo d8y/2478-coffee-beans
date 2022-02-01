@@ -7,3 +7,10 @@ export const cartSelector = selector({
     return cartState
   },
 })
+
+export const cartCounter = selector({
+  key: 'cartCounter',
+  get: ({ get }) => {
+    return get(cartSelector).length
+  },
+})
