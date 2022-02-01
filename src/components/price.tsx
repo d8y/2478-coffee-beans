@@ -8,5 +8,5 @@ export const Price = (props: Props) => {
     currency: 'JPY',
   })
 
-  return <span>{price}</span>
+  return <span>{price}円</span>
 }

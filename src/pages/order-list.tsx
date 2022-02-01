@@ -1,9 +1,7 @@
-import { Box, Container, HStack } from '@chakra-ui/react'
 import useSWR from 'swr'
 import axios, { AxiosResponse } from 'axios'
 import { KintoneResponse, Order } from '@/types'
 import { OrderListContents } from '@/components/orderListContents'
-import { DrawerMenu } from '@/components/drawerMenu'
 
 const fetcher = async (url: string): Promise<KintoneResponse> =>
   axios
@@ -24,18 +22,7 @@ const orderList = () => {
 
   const records: Array<Order> = data?.records
 
-  return (
-    <Container maxW={'container.xl'} centerContent>
-      <HStack align={'top'}>
-        <Box p={4} position={'fixed'} left={0}>
-          <DrawerMenu />
-        </Box>
-        <Box p={4}>
-          <OrderListContents records={records} />
-        </Box>
-      </HStack>
-    </Container>
-  )
+  return <OrderListContents records={records} />
 }
 
 export default orderList
