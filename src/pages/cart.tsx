@@ -24,8 +24,6 @@ const cart = () => {
   const toast = useToast()
 
   const handleClick = async () => {
-    console.log(orderList)
-
     if (orderList.length === 0) {
       toast({
         title: 'カートに商品がありません',
@@ -47,7 +45,9 @@ const cart = () => {
           isClosable: true,
         })
       })
-      .catch((e) => {})
+      .catch((e) => {
+        console.error(e)
+      })
       .finally(() => {})
   }
 
@@ -85,7 +85,7 @@ const cart = () => {
         </Tbody>
       </Table>
       <Stack align={'center'} pt={8}>
-        <Button onClick={handleClick}>追加</Button>
+        <Button onClick={handleClick}>発注追加</Button>
       </Stack>
     </Box>
   )

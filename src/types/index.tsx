@@ -25,6 +25,7 @@ export type Order = {
   price: NumberValue
   grams: NumberValue
   roast: NumberValue
+  master_id: NumberValue
 }
 
 export type Master = {

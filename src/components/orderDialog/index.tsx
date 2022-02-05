@@ -27,7 +27,7 @@ import { useForm } from 'react-hook-form'
 import { ContentsHeader } from '@/components/orderDialog/contentsHeader'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
-import { Master } from '@/types'
+import { Master, Order } from '@/types'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { cartState } from '@/atomes/cartAtom'
 import { CartIcon } from '@/components/icons/cartIcons'
@@ -56,17 +56,19 @@ const Index: FC<Props> = ({ record }) => {
   const thisWeekMonday = dayjs().day(1)
   const nextMonth = dayjs().add(1, 'month')
 
-  let t = []
+  let receivingDateOptions = []
   let i = 0
   while (thisWeekMonday.add(i, 'week').isSameOrBefore(nextMonth, 'month')) {
     const p = thisWeekMonday.add(i, 'week')
     if (p.isSame(nextMonth, 'month')) {
-      t.push(thisWeekMonday.add(i, 'week').format('YYYY-MM-DD'))
+      receivingDateOptions.push(
+        thisWeekMonday.add(i, 'week').format('YYYY-MM-DD')
+      )
     }
     i += 2
   }
 
-  async function onSubmit(values) {
+  async function onSubmit(values: Order) {
     const post = {
       purchase_order_date: { value: values.purchase_order_date },
       receiving_date: { value: values.receiving_date },
@@ -125,12 +127,12 @@ const Index: FC<Props> = ({ record }) => {
                   <FormControl isInvalid={errors.receiving_date}>
                     <FormLabel>受取日</FormLabel>
                     <Select
-                      options={t}
+                      options={receivingDateOptions}
                       {...register('receiving_date', {
                         required: '必須項目です',
                       })}
                     >
-                      {t.map((value, key) => (
+                      {receivingDateOptions.map((value, key) => (
                         <option key={key} value={value}>
                           {value}
                         </option>
@@ -205,7 +207,7 @@ const Index: FC<Props> = ({ record }) => {
                 type="submit"
                 isLoading={isSubmitting}
               >
-                発注追加
+                カートに追加
               </Button>
             </ModalFooter>
           </ModalContent>
