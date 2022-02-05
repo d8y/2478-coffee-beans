@@ -27,7 +27,7 @@ import { useForm } from 'react-hook-form'
 import { ContentsHeader } from '@/components/orderDialog/contentsHeader'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
-import { Master } from '@/types'
+import { Master, Order } from '@/types'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { cartState } from '@/atomes/cartAtom'
 import { CartIcon } from '@/components/icons/cartIcons'
@@ -68,7 +68,7 @@ const Index: FC<Props> = ({ record }) => {
     i += 2
   }
 
-  async function onSubmit(values) {
+  async function onSubmit(values: Order) {
     const post = {
       purchase_order_date: { value: values.purchase_order_date },
       receiving_date: { value: values.receiving_date },
@@ -207,7 +207,7 @@ const Index: FC<Props> = ({ record }) => {
                 type="submit"
                 isLoading={isSubmitting}
               >
-                発注追加
+                カートに追加
               </Button>
             </ModalFooter>
           </ModalContent>
