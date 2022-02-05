@@ -56,12 +56,14 @@ const Index: FC<Props> = ({ record }) => {
   const thisWeekMonday = dayjs().day(1)
   const nextMonth = dayjs().add(1, 'month')
 
-  let t = []
+  let receivingDateOptions = []
   let i = 0
   while (thisWeekMonday.add(i, 'week').isSameOrBefore(nextMonth, 'month')) {
     const p = thisWeekMonday.add(i, 'week')
     if (p.isSame(nextMonth, 'month')) {
-      t.push(thisWeekMonday.add(i, 'week').format('YYYY-MM-DD'))
+      receivingDateOptions.push(
+        thisWeekMonday.add(i, 'week').format('YYYY-MM-DD')
+      )
     }
     i += 2
   }
@@ -125,12 +127,12 @@ const Index: FC<Props> = ({ record }) => {
                   <FormControl isInvalid={errors.receiving_date}>
                     <FormLabel>受取日</FormLabel>
                     <Select
-                      options={t}
+                      options={receivingDateOptions}
                       {...register('receiving_date', {
                         required: '必須項目です',
                       })}
                     >
-                      {t.map((value, key) => (
+                      {receivingDateOptions.map((value, key) => (
                         <option key={key} value={value}>
                           {value}
                         </option>
