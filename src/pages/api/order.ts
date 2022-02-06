@@ -35,8 +35,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         .status(HTTP_SUCCESS_CODE)
         .setHeader('Content-Type', 'application/json')
         .end(JSON.stringify('success'))
-    } catch (e) {
-      res.status(e).json({
+    } catch (e: any) {
+      res.status(e.response.status).json({
         error: e.errors,
       })
     }
