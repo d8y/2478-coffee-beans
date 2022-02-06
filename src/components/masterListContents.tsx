@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const MasterListContents = ({ records }: Props) => {
-  const pageHeader = 'コーヒー豆マスタ'
+  const pageHeader = '商品一覧'
 
   const headers = [
     'コーヒーNo',

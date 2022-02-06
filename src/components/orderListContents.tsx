@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const OrderListContents = ({ records }: Props) => {
-  const title = '2478コーヒー豆発注リスト'
+  const title = '発注履歴'
 
   const headers = [
     'No',
@@ -40,7 +40,7 @@ export const OrderListContents = ({ records }: Props) => {
               {records.map((record: Order) => (
                 <Tr key={record.id.value}>
                   <Td isNumeric>{record.id.value}</Td>
-                  <Td>{record.purchase_order_date.value}</Td>
+                  <Td fontSize={'xs'}>{record.purchase_order_date.value}</Td>
                   <Td>{record.receiving_date.value}</Td>
                   <Td isNumeric>{record.coffee_no.value}</Td>
                   <Td>{record.product_name.value}</Td>
