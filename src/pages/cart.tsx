@@ -22,6 +22,7 @@ const Cart = () => {
   const cartList = useRecoilValue(cartSelector)
   const resetOrderState = useResetRecoilState(cartState)
   const toast = useToast()
+  const pageHeader = 'カート'
 
   const handleClick = async () => {
     if (cartList.length === 0) {
@@ -53,7 +54,7 @@ const Cart = () => {
 
   return (
     <Box p={4}>
-      <PageHeader title={'カート'} />
+      <PageHeader title={pageHeader} />
       <Table variant={'striped'} fontSize={'sm'}>
         <Thead>
           <Tr>

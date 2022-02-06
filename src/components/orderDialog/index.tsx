@@ -147,7 +147,6 @@ const Index: FC<Props> = ({ record }) => {
                   <FormControl isInvalid={Boolean(errors.receiving_date)}>
                     <FormLabel>受取日</FormLabel>
                     <Select
-                      options={receivingDateOptions}
                       {...register('receiving_date', {
                         required: '必須項目です',
                       })}
