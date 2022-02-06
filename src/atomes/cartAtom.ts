@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
-import { Order } from '@/types'
+import { Cart } from '@/types'
 
-export const cartState = atom<Order[]>({
+export const cartState = atom<Cart[]>({
   key: 'cartItems',
   default: [],
 })

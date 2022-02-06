@@ -12,19 +12,19 @@ import {
 import { PageHeader } from '@/components/pageHeader'
 import { cartSelector } from '@/selectors/cart'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
-import { Order } from '@/types'
+import { Cart } from '@/types'
 import { Price } from '@/components/price'
 import { Gram } from '@/components/gram'
 import axios from 'axios'
 import { cartState } from '@/atomes/cartAtom'
 
-const cart = () => {
-  const orderList = useRecoilValue(cartSelector)
+const Cart = () => {
+  const cartList = useRecoilValue(cartSelector)
   const resetOrderState = useResetRecoilState(cartState)
   const toast = useToast()
 
   const handleClick = async () => {
-    if (orderList.length === 0) {
+    if (cartList.length === 0) {
       toast({
         title: 'カートに商品がありません',
         status: 'error',
@@ -35,7 +35,7 @@ const cart = () => {
     }
 
     await axios
-      .post('/api/order', orderList)
+      .post('/api/order', cartList)
       .then(() => {
         resetOrderState()
         toast({
@@ -67,7 +67,7 @@ const cart = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {orderList.map((record: Order, key) => (
+          {cartList.map((record: Cart, key) => (
             <Tr key={key}>
               <Td>{record.receiving_date.value}</Td>
               <Td isNumeric>{record.coffee_no.value}</Td>
@@ -91,4 +91,4 @@ const cart = () => {
   )
 }
 
-export default cart
+export default Cart

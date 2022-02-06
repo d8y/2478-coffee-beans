@@ -7,18 +7,14 @@ type NumberValue = {
   value: number
 }
 
-type DateValue = {
-  value: Date
-}
-
 type StringValue = {
   value: string
 }
 
 export type Order = {
   id: NumberValue
-  purchase_order_date: DateValue
-  receiving_date: DateValue
+  purchase_order_date: StringValue
+  receiving_date: StringValue
   coffee_no: NumberValue
   product_name: StringValue
   count: NumberValue
@@ -35,4 +31,16 @@ export type Master = {
   grams: NumberValue
   price: NumberValue
   roast: NumberValue
+}
+
+export type Cart = {
+  purchase_order_date: StringValue
+  receiving_date: StringValue
+  coffee_no: NumberValue
+  product_name: StringValue
+  count: NumberValue
+  price: NumberValue
+  grams: NumberValue
+  roast: NumberValue
+  master_id: NumberValue
 }

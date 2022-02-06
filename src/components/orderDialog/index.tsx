@@ -21,13 +21,14 @@ import {
   Select,
   Text,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { ContentsHeader } from '@/components/orderDialog/contentsHeader'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
-import { Master, Order } from '@/types'
+import { Cart, Master } from '@/types'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { cartState } from '@/atomes/cartAtom'
 import { CartIcon } from '@/components/icons/cartIcons'
@@ -42,17 +43,14 @@ type Props = {
   record: Master
 }
 
-const Index: FC<Props> = ({ record }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm()
-  const cart = useRecoilValue(cartState)
-  const setOrderList = useSetRecoilState(cartState)
+type FormInput = {
+  count: string
+  purchase_order_date: string
+  receiving_date: string
+  roast: string
+}
 
-  const formatToday = dayjs().format('YYYY-MM-DD')
+const getReceivingDateOptions = () => {
   const thisWeekMonday = dayjs().day(1)
   const nextMonth = dayjs().add(1, 'month')
 
@@ -67,23 +65,45 @@ const Index: FC<Props> = ({ record }) => {
     }
     i += 2
   }
+  return receivingDateOptions
+}
 
-  async function onSubmit(values: Order) {
-    const post = {
-      purchase_order_date: { value: values.purchase_order_date },
-      receiving_date: { value: values.receiving_date },
+const Index: FC<Props> = ({ record }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormInput>()
+  const cart = useRecoilValue(cartState)
+  const setOrderList = useSetRecoilState(cartState)
+  const toast = useToast()
+
+  const formatToday = dayjs().format('YYYY-MM-DD')
+  const receivingDateOptions = getReceivingDateOptions()
+
+  const onSubmit = handleSubmit((data: FormInput) => {
+    const post: Cart = {
+      purchase_order_date: { value: String(data.purchase_order_date) },
+      receiving_date: { value: String(data.receiving_date) },
       coffee_no: { value: record.coffee_no.value },
       product_name: { value: record.product_name.value },
-      count: { value: values.count },
-      price: { value: record.price.value },
+      count: { value: Number(data.count) },
+      price: { value: Number(record.price.value) },
       grams: { value: record.grams.value },
-      roast: { value: values.roast },
+      roast: { value: Number(data.roast) },
       master_id: { value: record.id.value },
     }
 
     setOrderList([...cart, post])
+    toast({
+      title: 'カートに追加しました',
+      status: 'success',
+      position: 'top-right',
+      isClosable: true,
+    })
     onClose()
-  }
+  })
 
   return (
     <>
@@ -96,7 +116,7 @@ const Index: FC<Props> = ({ record }) => {
         scrollBehavior={'inside'}
       >
         <ModalOverlay />
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
           <ModalContent>
             <ModalHeader>注文追加</ModalHeader>
             <ModalCloseButton />
@@ -106,7 +126,7 @@ const Index: FC<Props> = ({ record }) => {
                 <ContentsHeader record={record} />
                 <Divider py={3} />
                 <Box py={2}>
-                  <FormControl isInvalid={errors.purchase_order_date}>
+                  <FormControl isInvalid={Boolean(errors.purchase_order_date)}>
                     <FormLabel>発注日</FormLabel>
                     <Input
                       id={'purchase_order_date'}
@@ -124,7 +144,7 @@ const Index: FC<Props> = ({ record }) => {
                   </FormControl>
                 </Box>
                 <Box py={2}>
-                  <FormControl isInvalid={errors.receiving_date}>
+                  <FormControl isInvalid={Boolean(errors.receiving_date)}>
                     <FormLabel>受取日</FormLabel>
                     <Select
                       options={receivingDateOptions}
@@ -151,7 +171,7 @@ const Index: FC<Props> = ({ record }) => {
                   </FormControl>
                 </Box>
                 <Box py={2}>
-                  <FormControl isInvalid={errors.count}>
+                  <FormControl isInvalid={Boolean(errors.count)}>
                     <FormLabel>個数</FormLabel>
                     <Input
                       type={'Number'}
@@ -168,7 +188,7 @@ const Index: FC<Props> = ({ record }) => {
                   </FormControl>
                 </Box>
                 <Box py={2}>
-                  <FormControl isInvalid={errors.roast}>
+                  <FormControl isInvalid={Boolean(errors.roast)}>
                     <FormLabel>ロースト</FormLabel>
                     <NumberInput
                       defaultValue={record.roast.value}
