@@ -8,7 +8,7 @@ type Props = {
   totalCount: Number
 }
 
-export default ({ records, totalCount }: Props) => {
+const MasterList = ({ records, totalCount }: Props) => {
   return <MasterListContents records={records} />
 }
 
@@ -34,3 +34,5 @@ export async function getServerSideProps() {
     props: result,
   }
 }
+
+export default MasterList

@@ -9,7 +9,7 @@ const fetcher = async (url: string): Promise<KintoneResponse> =>
     .then((res: AxiosResponse) => res.data)
     .catch()
 
-const orderList = () => {
+const OrderList = () => {
   const { data, error, isValidating } = useSWR('/api/order', fetcher)
 
   if (error) {
@@ -25,4 +25,4 @@ const orderList = () => {
   return <OrderListContents records={records} />
 }
 
-export default orderList
+export default OrderList

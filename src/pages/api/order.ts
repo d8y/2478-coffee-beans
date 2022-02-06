@@ -3,8 +3,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 const HTTP_SUCCESS_CODE = 200
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const appId = process.env.TRANSACTION_DATA_KINTONE_APP_ID
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { TRANSACTION_DATA_KINTONE_APP_ID: appId } = process.env
   if (!appId) {
     throw new Error('kintone app id が設定されていません')
   }
@@ -42,3 +42,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 }
+
+export default handler

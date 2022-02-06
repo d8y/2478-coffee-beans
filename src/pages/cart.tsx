@@ -18,7 +18,7 @@ import { Gram } from '@/components/gram'
 import axios from 'axios'
 import { cartState } from '@/atomes/cartAtom'
 
-const cart = () => {
+const Cart = () => {
   const cartList = useRecoilValue(cartSelector)
   const resetOrderState = useResetRecoilState(cartState)
   const toast = useToast()
@@ -91,4 +91,4 @@ const cart = () => {
   )
 }
 
-export default cart
+export default Cart
