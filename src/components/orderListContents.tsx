@@ -46,7 +46,7 @@ export const OrderListContents = ({ records }: Props) => {
                   <Td>{record.product_name.value}</Td>
                   <Td isNumeric>{record.count.value}</Td>
                   <Td isNumeric>
-                    <Price price={record.price.value} />
+                    <Price price={Number(record.price.value)} />
                   </Td>
                   <Td isNumeric>
                     <Gram gram={record.grams.value} />

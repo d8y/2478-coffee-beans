@@ -2,11 +2,11 @@ type Props = {
   price: number
 }
 
-export const Price = (props: Props) => {
-  const price = props.price.toLocaleString('ja-JP', {
+export const Price = ({ price }: Props) => {
+  const value = new Intl.NumberFormat('ja-JP', {
     style: 'currency',
     currency: 'JPY',
-  })
+  }).format(price)
 
-  return <span>{price}円</span>
+  return <span>{value}</span>
 }
