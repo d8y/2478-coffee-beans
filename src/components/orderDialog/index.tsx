@@ -21,6 +21,7 @@ import {
   Select,
   Text,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
@@ -76,6 +77,7 @@ const Index: FC<Props> = ({ record }) => {
   } = useForm<FormInput>()
   const cart = useRecoilValue(cartState)
   const setOrderList = useSetRecoilState(cartState)
+  const toast = useToast()
 
   const formatToday = dayjs().format('YYYY-MM-DD')
   const receivingDateOptions = getReceivingDateOptions()
@@ -94,6 +96,12 @@ const Index: FC<Props> = ({ record }) => {
     }
 
     setOrderList([...cart, post])
+    toast({
+      title: 'カートに追加しました',
+      status: 'success',
+      position: 'top-right',
+      isClosable: true,
+    })
     onClose()
   })
 
