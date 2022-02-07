@@ -17,6 +17,7 @@ import { Price } from '@/components/price'
 import { Gram } from '@/components/gram'
 import axios from 'axios'
 import { cartState } from '@/atomes/cartAtom'
+import { Title } from '@/components/title'
 
 const Cart = () => {
   const cartList = useRecoilValue(cartSelector)
@@ -54,6 +55,7 @@ const Cart = () => {
 
   return (
     <Box p={4}>
+      <Title />
       <PageHeader title={pageHeader} />
       <Table variant={'striped'} fontSize={'sm'}>
         <Thead>

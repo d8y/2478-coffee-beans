@@ -2,6 +2,7 @@ import { KintoneRestAPIClient } from '@kintone/rest-api-client'
 import React from 'react'
 import { MasterListContents } from '@/components/masterListContents'
 import { Master } from '@/types'
+import { Title } from '@/components/title'
 
 type Props = {
   records: Array<Master>
@@ -9,7 +10,12 @@ type Props = {
 }
 
 const MasterList = ({ records, totalCount }: Props) => {
-  return <MasterListContents records={records} />
+  return (
+    <>
+      <Title />
+      <MasterListContents records={records} />
+    </>
+  )
 }
 
 export async function getServerSideProps() {
