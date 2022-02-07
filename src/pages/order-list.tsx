@@ -2,6 +2,7 @@ import useSWR from 'swr'
 import axios, { AxiosResponse } from 'axios'
 import { KintoneResponse, Order } from '@/types'
 import { OrderListContents } from '@/components/orderListContents'
+import { Title } from '@/components/title'
 
 const fetcher = async (url: string): Promise<KintoneResponse> =>
   axios
@@ -22,7 +23,12 @@ const OrderList = () => {
 
   const records: Array<Order> = data?.records
 
-  return <OrderListContents records={records} />
+  return (
+    <>
+      <Title />
+      <OrderListContents records={records} />
+    </>
+  )
 }
 
 export default OrderList

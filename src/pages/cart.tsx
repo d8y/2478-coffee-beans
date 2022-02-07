@@ -5,6 +5,7 @@ import {
   Table,
   Tbody,
   Td,
+  Th,
   Thead,
   Tr,
   useToast,
@@ -17,17 +18,37 @@ import { Price } from '@/components/price'
 import { Gram } from '@/components/gram'
 import axios from 'axios'
 import { cartState } from '@/atomes/cartAtom'
+import { Title } from '@/components/title'
+
+const pageHeader = 'カート'
+const noItemsExplanation = 'カートに商品がありません'
+const headers = [
+  '受取日',
+  'コーヒーNo',
+  '商品名',
+  '数量',
+  '金額',
+  'グラム',
+  'ロースト',
+]
 
 const Cart = () => {
   const cartList = useRecoilValue(cartSelector)
   const resetOrderState = useResetRecoilState(cartState)
   const toast = useToast()
-  const pageHeader = 'カート'
+
+  if (cartList.length === 0) {
+    return (
+      <Box p={4}>
+        <div>{noItemsExplanation}</div>
+      </Box>
+    )
+  }
 
   const handleClick = async () => {
     if (cartList.length === 0) {
       toast({
-        title: 'カートに商品がありません',
+        title: noItemsExplanation,
         status: 'error',
         position: 'top-right',
         isClosable: true,
@@ -54,17 +75,14 @@ const Cart = () => {
 
   return (
     <Box p={4}>
+      <Title />
       <PageHeader title={pageHeader} />
       <Table variant={'striped'} fontSize={'sm'}>
         <Thead>
           <Tr>
-            <Td>受取日</Td>
-            <Td>コーヒーNo</Td>
-            <Td>商品名</Td>
-            <Td>グラム</Td>
-            <Td>金額</Td>
-            <Td>グラム</Td>
-            <Td>ロースト</Td>
+            {headers.map((header, key) => (
+              <Th key={key}>{header}</Th>
+            ))}
           </Tr>
         </Thead>
         <Tbody>
