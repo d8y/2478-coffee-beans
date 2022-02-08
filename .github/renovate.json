@@ -1,12 +1,23 @@
 {
-  "extends": ["config:base"],
-  "labels": ["dependencies"],
+  "extends": [
+    "config:base"
+  ],
+  "labels": [
+    "dependencies"
+  ],
   "packageRules": [
     {
-      "depTypeList": ["devDependencies"],
+      "depTypeList": [
+        "devDependencies"
+      ],
       "automerge": true
     }
   ],
   "timezone": "Asia/Tokyo",
-  "schedule": ["every weekend"]
+  "schedule": [
+    "every weekend"
+  ],
+  "baseBranches": [
+    "develop"
+  ]
 }
