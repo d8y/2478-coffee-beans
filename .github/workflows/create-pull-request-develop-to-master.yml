@@ -1,4 +1,4 @@
-name: create-pull-request-develop-to-master
+name: create-pull-request-develop-to-vercel
 
 on:
   pull_request:
@@ -14,8 +14,8 @@ jobs:
         uses: repo-sync/pull-request@v2.5
         with:
           source_branch: "develop"
-          destination_branch: "master"
-          pr_title: "$(date +%Y-%m-%d) Release"
+          destination_branch: "vercel"
+          pr_title: "release"
           pr_draft: false
           pr_allow_empty: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
