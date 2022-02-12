@@ -1,8 +1,8 @@
-import { PageHeader } from '@/components/pageHeader'
+import { PageHeader } from '@/components/ui/PageHeader'
 import { Box, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import { Order } from '@/types'
-import { Price } from '@/components/price'
-import { Gram } from '@/components/gram'
+import { Price } from '@/components/ui/Price'
+import { Gram } from '@/components/ui/Gram'
 import dayjs from 'dayjs'
 import { Date } from '@/components/pages/orderList/Date'
 

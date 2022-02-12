@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import axios, { AxiosResponse } from 'axios'
 import { KintoneResponse, Order } from '@/types'
-import { OrderListContents } from '@/components/orderListContents'
+import { OrderListContents } from '@/components/pages/orderList'
 import { Title } from '@/components/title'
 import { Text } from '@chakra-ui/react'
 

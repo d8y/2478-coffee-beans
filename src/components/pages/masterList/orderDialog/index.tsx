@@ -25,13 +25,13 @@ import {
 } from '@chakra-ui/react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
-import { ContentsHeader } from '@/components/orderDialog/contentsHeader'
+import { ContentsHeader } from '@/components/pages/masterList/orderDialog/contentsHeader'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
 import { Cart, Master } from '@/types'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { cartState } from '@/atomes/cartAtom'
-import { CartIcon } from '@/components/icons/cartIcons'
+import { CartIcon } from '@/components/icons/CartIcons'
 import 'dayjs/plugin/isSameOrBefore'
 
 const isSameOrBefore = require('dayjs/plugin/isSameOrBefore')
@@ -68,7 +68,7 @@ const getReceivingDateOptions = () => {
   return receivingDateOptions
 }
 
-const Index: FC<Props> = ({ record }) => {
+export const OrderDialog: FC<Props> = ({ record }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     register,
@@ -235,4 +235,3 @@ const Index: FC<Props> = ({ record }) => {
     </>
   )
 }
-export default Index

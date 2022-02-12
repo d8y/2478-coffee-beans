@@ -1,6 +1,6 @@
 import { KintoneRestAPIClient } from '@kintone/rest-api-client'
 import React from 'react'
-import { MasterListContents } from '@/components/masterListContents'
+import { MasterListContents } from '@/components/pages/masterList'
 import { Master } from '@/types'
 import { Title } from '@/components/title'
 

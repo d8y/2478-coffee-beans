@@ -1,8 +1,8 @@
-import { PageHeader } from '@/components/pageHeader'
+import { PageHeader } from '@/components/ui/PageHeader'
 import { Box, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
-import { Gram } from '@/components/gram'
-import { Price } from '@/components/price'
-import OrderDialog from '@/components/orderDialog'
+import { Gram } from '@/components/ui/Gram'
+import { Price } from '@/components/ui/Price'
+import { OrderDialog } from '@/components/pages/masterList/orderDialog'
 import React from 'react'
 import { Master } from '@/types'
 

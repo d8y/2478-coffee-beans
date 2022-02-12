@@ -7,7 +7,7 @@ type Props = {
   children?: ReactNode
 }
 
-export const Layout = ({ children }: Props) => {
+export const DefaultLayout = ({ children }: Props) => {
   return (
     <Container maxW={'container.xl'} centerContent>
       <HStack align={'top'}>
