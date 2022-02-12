@@ -1,10 +1,10 @@
-import { Box } from '@chakra-ui/react'
 import React from 'react'
+import { Box, Text } from '@chakra-ui/react'
 
 export const Footer = () => {
   return (
-    <footer>
-      <Box>©2022 d8y</Box>
-    </footer>
+    <Box as={'footer'}>
+      <Text>©2022 d8y</Text>
+    </Box>
   )
 }
