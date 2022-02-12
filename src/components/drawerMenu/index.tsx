@@ -17,6 +17,7 @@ import { HamburgerIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { useRecoilValue } from 'recoil'
 import { cartCounter } from '@/selectors/cart'
+import { Footer } from '@/components/footer'
 
 export const DrawerMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -28,7 +29,7 @@ export const DrawerMenu = () => {
         icon={<HamburgerIcon />}
         onClick={onOpen}
         aria-label={'leftIcon'}
-        variant={'unstyled'}
+        variant={'styled'}
       />
       <Drawer placement={'left'} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
@@ -50,7 +51,9 @@ export const DrawerMenu = () => {
               </NextLink>
             </Stack>
           </DrawerBody>
-          <DrawerFooter></DrawerFooter>
+          <DrawerFooter>
+            <Footer />
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
