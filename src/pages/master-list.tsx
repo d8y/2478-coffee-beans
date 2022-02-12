@@ -1,6 +1,6 @@
 import { KintoneRestAPIClient } from '@kintone/rest-api-client'
 import React from 'react'
-import { MasterListContents } from '@/components/masterListContents'
+import { MasterListContents } from '@/components/pages/masterList'
 import { Master } from '@/types'
 import { Title } from '@/components/title'
 
@@ -34,6 +34,7 @@ export async function getServerSideProps() {
   const result = await client.record.getRecords({
     app: appId,
     totalCount: true,
+    query: 'is_deleted not in ("削除")',
   })
 
   return {

@@ -10,12 +10,12 @@ import {
   Tr,
   useToast,
 } from '@chakra-ui/react'
-import { PageHeader } from '@/components/pageHeader'
+import { PageHeader } from '@/components/ui/PageHeader'
 import { cartSelector } from '@/selectors/cart'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
 import { Cart } from '@/types'
-import { Price } from '@/components/price'
-import { Gram } from '@/components/gram'
+import { Price } from '@/components/ui/Price'
+import { Gram } from '@/components/ui/Gram'
 import axios from 'axios'
 import { cartState } from '@/atomes/cartAtom'
 import { Title } from '@/components/title'

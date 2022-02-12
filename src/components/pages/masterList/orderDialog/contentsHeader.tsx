@@ -1,6 +1,6 @@
-import { ContentsRow } from '@/components/orderDialog/contentsRow'
-import { Gram } from '@/components/gram'
-import { Price } from '@/components/price'
+import { ContentsRow } from '@/components/pages/masterList/orderDialog/contentsRow'
+import { Gram } from '@/components/ui/Gram'
+import { Price } from '@/components/ui/Price'
 import { Master } from '@/types'
 
 type Props = {
