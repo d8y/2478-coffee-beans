@@ -1,12 +1,13 @@
 import { Box, Container, HStack } from '@chakra-ui/react'
 import { DrawerMenu } from '@/components/drawerMenu'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
+import { Footer } from '@/components/footer'
 
 type Props = {
   children?: ReactNode
 }
 
-export const Layout = ({ children }: Props) => {
+export const DefaultLayout = ({ children }: Props) => {
   return (
     <Container maxW={'container.xl'} centerContent>
       <HStack align={'top'}>
@@ -15,6 +16,7 @@ export const Layout = ({ children }: Props) => {
         </Box>
         <Box p={4}>{children}</Box>
       </HStack>
+      <Footer />
     </Container>
   )
 }

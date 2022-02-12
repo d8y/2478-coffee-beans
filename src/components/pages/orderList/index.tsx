@@ -1,8 +1,10 @@
-import { PageHeader } from '@/components/pageHeader'
+import { PageHeader } from '@/components/ui/PageHeader'
 import { Box, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import { Order } from '@/types'
-import { Price } from '@/components/price'
-import { Gram } from '@/components/gram'
+import { Price } from '@/components/ui/Price'
+import { Gram } from '@/components/ui/Gram'
+import dayjs from 'dayjs'
+import { Date } from '@/components/pages/orderList/Date'
 
 type Props = {
   records: Array<Order>
@@ -40,8 +42,12 @@ export const OrderListContents = ({ records }: Props) => {
               {records.map((record: Order) => (
                 <Tr key={record.id.value}>
                   <Td isNumeric>{record.id.value}</Td>
-                  <Td fontSize={'xs'}>{record.purchase_order_date.value}</Td>
-                  <Td>{record.receiving_date.value}</Td>
+                  <Td>
+                    <Date date={dayjs(record.purchase_order_date.value)} />
+                  </Td>
+                  <Td>
+                    <Date date={dayjs(record.receiving_date.value)} />
+                  </Td>
                   <Td isNumeric>{record.coffee_no.value}</Td>
                   <Td>{record.product_name.value}</Td>
                   <Td isNumeric>{record.count.value}</Td>
