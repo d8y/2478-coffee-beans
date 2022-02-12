@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 import { KintoneResponse, Order } from '@/types'
 import { OrderListContents } from '@/components/orderListContents'
 import { Title } from '@/components/title'
+import { Text } from '@chakra-ui/react'
 
 const fetcher = async (url: string): Promise<KintoneResponse> =>
   axios
@@ -14,11 +15,11 @@ const OrderList = () => {
   const { data, error, isValidating } = useSWR('/api/order', fetcher)
 
   if (error) {
-    return <div>failed to load</div>
+    return <Text>failed to load</Text>
   }
 
   if (data === undefined) {
-    return <div>loading</div>
+    return <Text>Loading</Text>
   }
 
   const records: Array<Order> = data?.records
