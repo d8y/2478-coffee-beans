@@ -34,6 +34,7 @@ export async function getServerSideProps() {
   const result = await client.record.getRecords({
     app: appId,
     totalCount: true,
+    query: 'is_deleted not in ("削除")',
   })
 
   return {
