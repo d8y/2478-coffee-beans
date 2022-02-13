@@ -20,12 +20,10 @@ services:
         volumes:
             - '.:/var/www/html'
         networks:
-            - sail
+            - 2478-networks
         depends_on:
             - mysql
             - redis
-            - meilisearch
-            - selenium
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -38,11 +36,11 @@ services:
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
-            - 'sail-mysql:/var/lib/mysql'
+            - '2478-db-volume:/var/lib/mysql'
         networks:
-            - sail
+            - 2478-networks
         healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
+            test: [ "CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}" ]
             retries: 3
             timeout: 5s
     redis:
@@ -50,23 +48,11 @@ services:
         ports:
             - '${FORWARD_REDIS_PORT:-6379}:6379'
         volumes:
-            - 'sail-redis:/data'
+            - '2478-redis:/data'
         networks:
-            - sail
+            - 2478-networks
         healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
-            retries: 3
-            timeout: 5s
-    meilisearch:
-        image: 'getmeili/meilisearch:latest'
-        ports:
-            - '${FORWARD_MEILISEARCH_PORT:-7700}:7700'
-        volumes:
-            - 'sail-meilisearch:/data.ms'
-        networks:
-            - sail
-        healthcheck:
-            test: ["CMD", "wget", "--no-verbose", "--spider",  "http://localhost:7700/health"]
+            test: [ "CMD", "redis-cli", "ping" ]
             retries: 3
             timeout: 5s
     mailhog:
@@ -75,20 +61,12 @@ services:
             - '${FORWARD_MAILHOG_PORT:-1025}:1025'
             - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
         networks:
-            - sail
-    selenium:
-        image: 'selenium/standalone-chrome'
-        volumes:
-            - '/dev/shm:/dev/shm'
-        networks:
-            - sail
+            - 2478-networks
 networks:
-    sail:
+    2478-networks:
         driver: bridge
 volumes:
-    sail-mysql:
+    2478-db-volume:
         driver: local
-    sail-redis:
-        driver: local
-    sail-meilisearch:
+    2478-redis:
         driver: local
