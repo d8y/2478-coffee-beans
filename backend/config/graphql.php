@@ -1,6 +1,15 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
+use App\GraphQL\Types\CoffeeBeanType;
+use App\GraphQL\Types\OrderType;
+use Rebing\GraphQL\GraphQLController;
+use Rebing\GraphQL\Support\ExecutionMiddleware\AddAuthUserContextValueMiddleware;
+use Rebing\GraphQL\Support\ExecutionMiddleware\AutomaticPersistedQueriesMiddleware;
+use Rebing\GraphQL\Support\ExecutionMiddleware\ValidateOperationParamsMiddleware;
+use Rebing\GraphQL\Support\PaginationType;
+use Rebing\GraphQL\Support\SimplePaginationType;
 
 return [
     'route' => [
@@ -8,7 +17,7 @@ return [
         'prefix' => 'graphql',
 
         // The controller/method to use in GraphQL request.
-        'controller' => \Rebing\GraphQL\GraphQLController::class . '@query',
+        'controller' => GraphQLController::class . '@query',
 
         // Any middleware for the graphql route group
         // This middleware will apply to all schemas
@@ -74,7 +83,8 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
-                // ExampleQuery::class,
+                'coffeeBeans' => App\GraphQL\Queries\CoffeeBeansQuery::class,
+                'orders' => App\GraphQL\Queries\OrdersQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
@@ -82,6 +92,8 @@ return [
             // The types only available in this schema
             'types' => [
                 // ExampleType::class,
+                'CoffeeBean' => CoffeeBeanType::class,
+                'Order' => OrderType::class
             ],
 
             // Laravel HTTP middleware
@@ -148,20 +160,20 @@ return [
      * You can define your own pagination type.
      * Reference \Rebing\GraphQL\Support\PaginationType::class
      */
-    'pagination_type' => \Rebing\GraphQL\Support\PaginationType::class,
+    'pagination_type' => PaginationType::class,
 
     /*
      * You can define your own simple pagination type.
      * Reference \Rebing\GraphQL\Support\SimplePaginationType::class
      */
-    'simple_pagination_type' => \Rebing\GraphQL\Support\SimplePaginationType::class,
+    'simple_pagination_type' => SimplePaginationType::class,
 
     /*
      * Config for GraphiQL (see (https://github.com/graphql/graphiql).
      */
     'graphiql' => [
         'prefix' => 'graphiql', // Do NOT use a leading slash
-        'controller' => \Rebing\GraphQL\GraphQLController::class . '@graphiql',
+        'controller' => GraphQLController::class . '@graphiql',
         'middleware' => [],
         'view' => 'graphql::graphiql',
         'display' => env('ENABLE_GRAPHIQL', true),
@@ -223,10 +235,10 @@ return [
      * Execution middlewares
      */
     'execution_middleware' => [
-        \Rebing\GraphQL\Support\ExecutionMiddleware\ValidateOperationParamsMiddleware::class,
+        ValidateOperationParamsMiddleware::class,
         // AutomaticPersistedQueriesMiddleware listed even if APQ is disabled, see the docs for the `'apq'` configuration
-        \Rebing\GraphQL\Support\ExecutionMiddleware\AutomaticPersistedQueriesMiddleware::class,
-        \Rebing\GraphQL\Support\ExecutionMiddleware\AddAuthUserContextValueMiddleware::class,
+        AutomaticPersistedQueriesMiddleware::class,
+        AddAuthUserContextValueMiddleware::class,
         // \Rebing\GraphQL\Support\ExecutionMiddleware\UnusedVariablesMiddleware::class,
     ],
 ];
