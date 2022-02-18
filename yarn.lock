@@ -776,10 +776,10 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@kintone/rest-api-client@2.0.34":
-  version "2.0.34"
-  resolved "https://registry.yarnpkg.com/@kintone/rest-api-client/-/rest-api-client-2.0.34.tgz#f60f9362b8e1f9b54a8b1d98cfa160af08a405a6"
-  integrity sha512-4IN4SQloRgY2jO0N3O9eIpjeK7S4rJpslwwbzz2agjTjeHFax0b/uB8pPsCByhgLXlD8LKiQBbaLQdEaqM65JA==
+"@kintone/rest-api-client@2.0.35":
+  version "2.0.35"
+  resolved "https://registry.yarnpkg.com/@kintone/rest-api-client/-/rest-api-client-2.0.35.tgz#4c4191785f264c6ffebcdd4e22228d607623a011"
+  integrity sha512-twI8cQA/9/lyIZvHmbd25rK8ZIc8kE7Z6AbM3HEHSSKvOVX1PyhQZVOhJpT5BH/9OIm9yJWm5Fas+ygeveVmvw==
   dependencies:
     axios "^0.24.0"
     core-js "^3.21.0"
