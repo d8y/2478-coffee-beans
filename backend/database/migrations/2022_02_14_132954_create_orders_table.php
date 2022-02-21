@@ -10,7 +10,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('coffee_beans_id')->comment();
+            $table->bigInteger('coffee_bean_id')->comment();
             $table->date('purchase_order_date')->comment();
             $table->date('receiving_date')->comment();
             $table->smallInteger('grams')->comment();

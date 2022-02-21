@@ -21,7 +21,7 @@ class OrderType extends GraphQLType
                 'type' => Type::nonNull(Type::id()),
                 'description' => 'id',
             ],
-            'coffee_beans_id' => [
+            'coffee_bean_id' => [
                 'type' => Type::nonNull(Type::id()),
                 'description' => '商品番号',
             ],
