@@ -83,11 +83,13 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
-                'coffeeBeans' => App\GraphQL\Queries\CoffeeBeansQuery::class,
-                'orders' => App\GraphQL\Queries\OrdersQuery::class,
+                'coffeeBeans' => App\GraphQL\Queries\CoffeeBean\CoffeeBeansQuery::class,
+                'orders' => App\GraphQL\Queries\Order\OrdersQuery::class,
             ],
             'mutation' => [
                 // ExampleMutation::class,
+                'createCoffeeBean' => App\GraphQL\Mutations\CoffeeBean\CreateCoffeeBeanMutation::class,
+                'createOrder' => App\GraphQL\Mutations\Order\CreateOrderMutation::class,
             ],
             // The types only available in this schema
             'types' => [

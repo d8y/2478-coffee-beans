@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\GraphQL\Queries;
+namespace App\GraphQL\Queries\CoffeeBean;
 
 use App\Models\CoffeeBean;
 use Closure;
