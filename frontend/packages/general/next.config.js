@@ -1,3 +1,4 @@
+const path = require('path')
 module.exports = {
     reactStrictMode: true,
     async redirects() {
@@ -9,4 +10,8 @@ module.exports = {
             },
         ]
     },
+    webpack: (config) => {
+        config.resolve.alias['^@'] = path.resolve(__dirname, '../common')
+        return config
+    }
 }

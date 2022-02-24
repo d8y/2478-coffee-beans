@@ -1,16 +1,21 @@
 {
-  "name": "tmp",
-  "version": "0.1.0",
+  "name": "frontend",
+  "version": "1.0.0",
   "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "scripts": {
     "dev": "run-p dev:*",
-    "dev:next": "next dev --port 2478",
-    "dev:path": "pathpida --ignorePath .gitignore --watch",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev:general": "yarn workspace general dev",
+    "build": "run-p next build:*",
+    "build:general": "yarn workspace general:build",
+    "lint": "run-p lint:*",
     "typecheck": "tsc --noEmit",
-    "format": "prettier --write \"./src/**/*.{ts,tsx}\""
+    "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
+    "generate": "yarn workspace general graphql-codegen"
   },
   "dependencies": {
     "@chakra-ui/icons": "1.1.5",

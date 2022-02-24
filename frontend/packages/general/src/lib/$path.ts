@@ -14,3 +14,11 @@ export const pagesPath = {
 
 // prettier-ignore
 export type PagesPath = typeof pagesPath
+
+// prettier-ignore
+export const staticPath = {
+
+} as const
+
+// prettier-ignore
+export type StaticPath = typeof staticPath
