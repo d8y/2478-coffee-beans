@@ -25,14 +25,15 @@ import {
 } from '@chakra-ui/react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
-import { ContentsHeader } from '@/components/pages/masterList/orderDialog/contentsHeader'
+import { ContentsHeader } from '@/components/pages/masterList/orderDialog/ContentsHeader'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
-import { Cart, Master } from '@/types'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { cartState } from '@/atomes/cartAtom'
 import { CartIcon } from '@/components/icons/CartIcons'
 import 'dayjs/plugin/isSameOrBefore'
+import { CoffeeBean } from '@/generated/graphql'
+import { Cart } from '@/types'
 
 const isSameOrBefore = require('dayjs/plugin/isSameOrBefore')
 dayjs.extend(isSameOrBefore)
@@ -40,7 +41,7 @@ dayjs.extend(isSameOrBefore)
 dayjs.locale('ja')
 
 type Props = {
-  record: Master
+  coffeeBean: CoffeeBean
 }
 
 type FormInput = {
@@ -68,34 +69,36 @@ const getReceivingDateOptions = () => {
   return receivingDateOptions
 }
 
-export const OrderDialog: FC<Props> = ({ record }) => {
+export const OrderDialog: FC<Props> = ({ coffeeBean }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormInput>()
-  const cart = useRecoilValue(cartState)
+  const cartList = useRecoilValue(cartState)
   const setOrderList = useSetRecoilState(cartState)
   const toast = useToast()
 
   const formatToday = dayjs().format('YYYY-MM-DD')
   const receivingDateOptions = getReceivingDateOptions()
 
-  const onSubmit = handleSubmit((data: FormInput) => {
+  const onSubmit = handleSubmit((input: FormInput) => {
     const post: Cart = {
-      purchase_order_date: { value: String(data.purchase_order_date) },
-      receiving_date: { value: String(data.receiving_date) },
-      coffee_no: { value: record.coffee_no.value },
-      product_name: { value: record.product_name.value },
-      count: { value: Number(data.count) },
-      price: { value: Number(record.price.value) },
-      grams: { value: record.grams.value },
-      roast: { value: Number(data.roast) },
-      master_id: { value: record.id.value },
+      purchase_order_date: String(input.purchase_order_date),
+      receiving_date: String(input.receiving_date),
+      coffee_no: String(coffeeBean.coffee_no),
+      product_name: String(coffeeBean.product_name),
+      count: Number(1),
+      price: Number(coffeeBean.price),
+      grams: Number(coffeeBean.grams),
+      roast: Number(input.roast),
+      coffee_bean_id: Number(coffeeBean.id),
     }
 
-    setOrderList([...cart, post])
+    const set = cartList.length === 0 ? [post] : [...cartList, post]
+
+    setOrderList(set)
     toast({
       title: 'カートに追加しました',
       status: 'success',
@@ -123,7 +126,7 @@ export const OrderDialog: FC<Props> = ({ record }) => {
             <Text pl={6}>以下の内容で追加します</Text>
             <ModalBody>
               <Box>
-                <ContentsHeader record={record} />
+                <ContentsHeader coffeeBean={coffeeBean} />
                 <Divider py={3} />
                 <Box py={2}>
                   <FormControl isInvalid={Boolean(errors.purchase_order_date)}>
@@ -190,7 +193,7 @@ export const OrderDialog: FC<Props> = ({ record }) => {
                   <FormControl isInvalid={Boolean(errors.roast)}>
                     <FormLabel>ロースト</FormLabel>
                     <NumberInput
-                      defaultValue={record.roast.value}
+                      defaultValue={coffeeBean.roast}
                       min={1}
                       max={6}
                     >

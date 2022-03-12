@@ -6,13 +6,13 @@
     "dev": "run-p dev:*",
     "dev:next": "next dev",
     "dev:path": "pathpida --ignorePath .gitignore --watch --enableStatic",
+    "dev:graphql": "graphql-codegen --watch",
     "build": "pathpida --ignorePath .gitignore --enableStatic && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "run-p lint:*",
+    "lint:eslint": "eslint --ext .js,.ts,.jsx,.tsx --ignore-path .lintignore . --max-warnings 0",
     "typecheck": "tsc --noEmit",
-    "format": "prettier --write \"./src/**/*.{ts,tsx}\""
-  },
-  "config": {
-    "port": "2478"
+    "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
+    "generate": "graphql-codegen --config codegen.yml"
   }
 }

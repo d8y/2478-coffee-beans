@@ -1,0 +1,16 @@
+query orders {
+    orders {
+        id
+        coffee_bean_id
+        purchase_order_date
+        receiving_date
+        grams
+        price
+        roast
+        count
+        coffeeBean {
+            coffee_no
+            product_name
+        }
+    }
+}

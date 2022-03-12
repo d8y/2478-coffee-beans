@@ -5,7 +5,7 @@ module.exports = {
         return [
             {
                 source: '/',
-                destination: '/master-list',
+                destination: '/master',
                 permanent: true,
             },
         ]

@@ -1,17 +1,14 @@
 import { PageHeader } from '@/components/ui/PageHeader'
-import { Box, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Box, Table, Tbody, Td, Tr } from '@chakra-ui/react'
 import { Gram } from '@/components/ui/Gram'
 import { Price } from '@/components/ui/Price'
 import { OrderDialog } from '@/components/pages/masterList/orderDialog'
 import React from 'react'
-import { Master } from '@/types'
+import { CoffeeBean, useCoffeeBeansQuery } from '@/generated/graphql'
+import { TableHeader } from '@/components/ui/TableHeader'
 
-type Props = {
-  records: Array<Master>
-}
-
-export const MasterListContents = ({ records }: Props) => {
-  const pageHeader = '商品一覧'
+export const MasterListContents = () => {
+  const title = '商品一覧'
 
   const headers = [
     'コーヒーNo',
@@ -21,33 +18,30 @@ export const MasterListContents = ({ records }: Props) => {
     '店主おすすめロースト',
     '',
   ]
+
+  const { data } = useCoffeeBeansQuery()
+
   return (
     <>
       <Box p={4}>
-        <PageHeader title={pageHeader} />
+        <PageHeader title={title} />
         <Box>
           <Table variant="striped" fontSize="sm">
-            <Thead>
-              <Tr>
-                {headers.map((header, key) => (
-                  <Th key={key}>{header}</Th>
-                ))}
-              </Tr>
-            </Thead>
+            <TableHeader headers={headers} />
             <Tbody>
-              {records.map((record: Master) => (
-                <Tr key={record.id.value}>
-                  <Td isNumeric>{record.coffee_no.value}</Td>
-                  <Td>{record.product_name.value}</Td>
+              {data?.coffeeBeans?.map((coffeeBean: CoffeeBean) => (
+                <Tr key={coffeeBean.id}>
+                  <Td isNumeric>{coffeeBean.coffee_no}</Td>
+                  <Td>{coffeeBean.product_name}</Td>
                   <Td isNumeric>
-                    <Gram gram={record.grams.value} />
+                    <Gram gram={coffeeBean.grams} />
                   </Td>
                   <Td isNumeric>
-                    <Price price={record.price.value} />
+                    <Price price={coffeeBean.price} />
                   </Td>
-                  <Td isNumeric>{record.roast.value}</Td>
+                  <Td isNumeric>{coffeeBean.roast}</Td>
                   <Td>
-                    <OrderDialog record={record} />
+                    <OrderDialog coffeeBean={coffeeBean} />
                   </Td>
                 </Tr>
               ))}

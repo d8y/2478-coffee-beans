@@ -1,0 +1,10 @@
+query coffeeBeans {
+    coffeeBeans {
+        id
+        product_name
+        grams
+        roast
+        price
+        coffee_no
+    }
+}

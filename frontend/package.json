@@ -12,12 +12,14 @@
     "dev:general": "yarn workspace general dev",
     "build": "run-p next build:*",
     "build:general": "yarn workspace general:build",
-    "lint": "run-p lint:*",
+    "lint": "run-s lint:*",
+    "lint:general": "yarn workspace general lint",
     "typecheck": "tsc --noEmit",
-    "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
+    "format": "prettier --write \"./packages/**/src/**/*.{ts,tsx}\"",
     "generate": "yarn workspace general graphql-codegen"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.9",
     "@chakra-ui/icons": "1.1.5",
     "@chakra-ui/react": "1.8.3",
     "@emotion/react": "11.7.1",
@@ -25,6 +27,7 @@
     "@kintone/rest-api-client": "2.0.34",
     "dayjs": "1.10.7",
     "framer-motion": "6.2.6",
+    "graphql": "^16.3.0",
     "next": "12.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -33,6 +36,11 @@
     "swr": "1.2.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/introspection": "^2.1.1",
+    "@graphql-codegen/typescript": "^2.4.5",
+    "@graphql-codegen/typescript-operations": "^2.3.2",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.8",
     "@types/node": "16.11.24",
     "@types/react": "17.0.39",
     "eslint": "8.9.0",

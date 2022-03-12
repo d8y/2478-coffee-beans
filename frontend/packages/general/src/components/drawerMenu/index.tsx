@@ -39,15 +39,15 @@ export const DrawerMenu = () => {
           <DrawerHeader borderBottomWidth="1px">コーヒー豆管理</DrawerHeader>
           <DrawerBody>
             <Stack pl={4}>
-              <NextLink href={pagesPath.cart.$url()}>
+              <NextLink href={pagesPath.cart.$url().pathname}>
                 <Link onClick={onClose}>
                   カート<Badge>{cartCount}</Badge>
                 </Link>
               </NextLink>
-              <NextLink href={pagesPath.master_list.$url()}>
+              <NextLink href={pagesPath.master.$url().pathname}>
                 <Link onClick={onClose}>商品一覧</Link>
               </NextLink>
-              <NextLink href={pagesPath.order_list.$url()}>
+              <NextLink href={pagesPath.order.$url().pathname}>
                 <Link onClick={onClose}>発注履歴</Link>
               </NextLink>
             </Stack>

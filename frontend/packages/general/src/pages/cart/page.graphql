@@ -1,0 +1,5 @@
+mutation CreateOrders($input: [OrderInput!]!) {
+    createOrders(input: $input){
+        affectedRows
+    }
+}
