@@ -4,6 +4,7 @@ namespace App\GraphQL\Types;
 
 use App\Models\Order;
 use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class OrderType extends GraphQLType
@@ -33,14 +34,6 @@ class OrderType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => '受取日',
             ],
-            'coffee_no' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => '商品番号',
-            ],
-            'product_name' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => '商品名'
-            ],
             'grams' => [
                 'type' => Type::nonNull(Type::int()),
                 'description' => 'グラム',
@@ -49,10 +42,19 @@ class OrderType extends GraphQLType
                 'type' => Type::nonNull(Type::int()),
                 'description' => '金額',
             ],
+            'count' => [
+                'type' => Type::nonNull(Type::int()),
+                'description' => '個数',
+            ],
             'roast' => [
                 'type' => Type::nonNull(Type::int()),
                 'description' => 'ロースト',
             ],
+            'coffeeBean' => [
+                'type' => Type::nonNull(GraphQL::type('CoffeeBean')),
+                'description' => 'the coffeeBean',
+            ],
+
         ];
     }
 }

@@ -2,27 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\GraphQL\Mutations\Order;
+namespace App\GraphQL\Inputs;
 
-use Closure;
-use GraphQL;
-use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Rebing\GraphQL\Support\Mutation;
+use Rebing\GraphQL\Support\InputType;
 
-class CreateOrderMutation extends Mutation
+class OrderInput extends InputType
 {
     protected $attributes = [
-        'name' => 'createOrder',
-        'description' => '注文の登録'
+        'name' => 'OrderInput',
+        'description' => 'order input',
     ];
 
-    public function type(): Type
-    {
-        return GraphQL::type('Order');
-    }
-
-    public function args(): array
+    public function fields(): array
     {
         return [
             'coffee_bean_id' => [
@@ -61,14 +53,5 @@ class CreateOrderMutation extends Mutation
                 'rules' => ['required', 'integer', 'between:1,6']
             ],
         ];
-    }
-
-    public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
-    {
-        $fields = $getSelectFields();
-        $select = $fields->getSelect();
-        $with = $fields->getRelations();
-
-        return [];
     }
 }

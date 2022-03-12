@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Order extends Model
 {
@@ -14,4 +15,9 @@ class Order extends Model
         'price',
         'roast',
     ];
+
+    public function coffeeBean(): HasOne
+    {
+        return $this->hasOne(CoffeeBean::class, 'id', 'coffee_bean_id');
+    }
 }

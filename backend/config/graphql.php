@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\GraphQL\Types\CoffeeBeanType;
 use App\GraphQL\Types\OrderType;
+use App\GraphQL\Types\VoidType;
 use Rebing\GraphQL\GraphQLController;
 use Rebing\GraphQL\Support\ExecutionMiddleware\AddAuthUserContextValueMiddleware;
 use Rebing\GraphQL\Support\ExecutionMiddleware\AutomaticPersistedQueriesMiddleware;
@@ -90,12 +91,15 @@ return [
                 // ExampleMutation::class,
                 'createCoffeeBean' => App\GraphQL\Mutations\CoffeeBean\CreateCoffeeBeanMutation::class,
                 'createOrder' => App\GraphQL\Mutations\Order\CreateOrderMutation::class,
+                'createOrders' => App\GraphQL\Mutations\Order\CreateOrdersMutation::class,
             ],
             // The types only available in this schema
             'types' => [
                 // ExampleType::class,
                 'CoffeeBean' => CoffeeBeanType::class,
-                'Order' => OrderType::class
+                'Order' => OrderType::class,
+                'OrderInput' => App\GraphQL\Inputs\OrderInput::class,
+                'CoffeeBeansMutationResponse' => App\GraphQL\Types\CoffeeBeansMutationResponseType::class,
             ],
 
             // Laravel HTTP middleware
