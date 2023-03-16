@@ -9,7 +9,7 @@ jobs:
   createdPullRequest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: GitHub Pull Request Action for master
         uses: repo-sync/pull-request@v2.6
         with:
